@@ -20,3 +20,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('posts/{slug}','PostsController@show');
 
+Route::get('/', function(){
+    return view('layouts.index');
+});
+Route::get('/about', function(){
+    return view('pages.about');
+});
+
