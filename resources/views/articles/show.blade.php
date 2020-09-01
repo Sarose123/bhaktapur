@@ -10,7 +10,9 @@
             <h2>{{ $article->title}}</h2>
 				<span class="byline">{{ $article->excerpt}}</span> </div>
 			<p><img src="/images/banner.jpg" alt="" class="image image-full" /> </p>
-            <p>{{ $article->body}}</p>
+			<p>{{ $article->body}}</p>
+			<a href="{{ route('article.edit',$article->id)}}">
+			<button class="btn btn-success">Edit</button> </a>
 		</div>
 		
 	</div>

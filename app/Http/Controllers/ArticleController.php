@@ -25,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -36,7 +36,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $article = new Article();
+        $article->title = $request->title;
+        $article->excerpt = $request->excerpt;
+        $article->body = $request->body;
+        $article->save();
+
+        session()->flash('success','Article Created Successfully');
+        return redirect(route('articles.index'));
     }
 
     /**
@@ -57,9 +65,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(article $article)
     {
-        //
+
+        return view('articles.create')->with('article' ,$article);
     }
 
     /**
