@@ -13,6 +13,7 @@
                 <p><img src="/images/banner.jpg" alt="" class="image image-full" /> </p>
                 <p>{{ $article->body}}</p>
                 <button class="btn btn-success">Ok</button>
+                <a href="{{route('article.create')}}"><button class="btn btn-success">Create An Article</button></a>
             @endforeach
 			
 		</div>

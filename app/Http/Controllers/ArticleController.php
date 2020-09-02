@@ -36,7 +36,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        
+        request()->validate([
+            'title' => 'required',
+            'excerpt'=> 'required',
+            'body' => 'required'
+        ]);
+
         $article = new Article();
         $article->title = $request->title;
         $article->excerpt = $request->excerpt;
@@ -44,7 +49,7 @@ class ArticleController extends Controller
         $article->save();
 
         session()->flash('success','Article Created Successfully');
-        return redirect(route('articles.index'));
+        return redirect(route('article.index'));
     }
 
     /**
@@ -53,10 +58,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
-        return view('articles.show')->with('article',$article);
+        
+        return view('articles.show')->with('article',$article); 
     }
 
     /**
@@ -78,9 +83,25 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Article $article)
     {
-        //
+        request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required'
+        ]);
+       
+        
+        $article->title = request('title');
+        $article->excerpt = request('excerpt');
+        $article->body = request('body');
+        $article->save();
+
+        session()->flash('success', 'Updated Successfully');
+
+        return redirect(route('article.index'));
+        
+        
     }
 
     /**
